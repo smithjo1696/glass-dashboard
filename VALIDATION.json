@@ -1,0 +1,76 @@
+{
+  "release": "0.1.5-preview",
+  "date": "2026-10-28",
+  "nativeHomeAssistant": {
+    "version": "2026.10.4",
+    "operatingSystem": "HAOS 18.4",
+    "environment": "Fresh disposable VM with randomized synthetic entities and checkerboard images; no production data cloned",
+    "checks": [
+      "Native configuration check passed; 12 dashboard views loaded",
+      "Clean setup and optional weather, two cameras, two media players and 12 system sensors rendered",
+      "All cameras gallery and return navigation worked",
+      "Image selection/cancel made no upload; Apply uploaded one synthetic PNG; library reuse worked",
+      "High contrast preset Apply and reviewed previous-backup restore worked",
+      "Native administration shell and disable_ios_shell recovery route worked",
+      "390x844 phone and 844x390 landscape layouts inspected; native wheel reached scroll bottom",
+      "Background preview boolean collision fixed and regression checked",
+      "Default-theme opaque view background fixed and visually verified",
+      "Media progress undefined-config error reproduced before fix; fresh authenticated native load and System-to-Cameras navigation passed with zero console errors after lazy registration wait"
+    ],
+    "limitations": [
+      "Physical iOS/Android devices not tested",
+      "Native HTTP migration repair is test-instance configuration, not a dashboard feature"
+    ],
+    "authenticatedBrowserRendering": "Verified in actual signed-in native HA frontend"
+  },
+  "browserFixture": {
+    "environment": "Local browser fixture with simulated native card helpers and sample entities, using actual release modules",
+    "checks": [
+      "Clean demo starts without selected entities",
+      "System sensor setup saves and renders",
+      "Unused module navigation disappears",
+      "All four entity types can be skipped when importing into an empty instance",
+      "Home and Settings remain reachable with every module disabled",
+      "Native header/sidebar restored outside dashboard and custom shell resumes on return",
+      "No browser console errors in checked states",
+      "390x844 viewport: content starts below navigation; settings reaches its full scroll bottom"
+    ],
+    "limitation": "Fixture native card helpers are simulated; this does not substitute for native HA frontend rendering on actual iOS devices."
+  },
+  "automated": [
+    "All JavaScript modules pass node --check",
+    "Default dashboard requires no entity IDs",
+    "Resource and custom-element manifest checks pass",
+    "No personal artwork, private service addresses or source-installation entity IDs in defaults",
+    "Shareable export privacy filtering and version/schema/domain validation pass",
+    "Credential parameters, external image paths and script navigation are rejected during import",
+    "Maximum 73 entity mappings export/import round-trip passes; 74 slots are rejected",
+    "Lazy native registration precedes hass/DOM attachment; disconnected pending sections do not attach cards"
+  ],
+  "cleanup": "Test VM retained, autostart disabled and gracefully stopped after tests. Production existing build retained with narrow preview and lazy-card loading fixes; no production restart.",
+  "remainingBeforePublicStableRelease": [
+    "Real iOS/Android device checks",
+    "Choose repository name and review release contents",
+    "Actual HACS install, catalog review and update migrations remain untested",
+    "Confirm draft MIT copyright notice before publishing"
+  ],
+  "publication": "No GitHub repository or public release created.",
+  "repository": {
+    "localGit": "main initialized, no remote, no commits yet",
+    "license": "MIT included in local draft for review",
+    "workflow": "Pinned official actions with contents:read; equivalent validation commands passed locally; GitHub execution pending"
+  },
+  "distribution": {
+    "hacsMetadata": "Prepared from official plugin requirements; actual HACS install not tested",
+    "bundle": "dist/glass-dashboard.js, no runtime sibling imports, complete MIT notice",
+    "browserFixtureChecks": [
+      "Background editor loads",
+      "Solid background apply saves locally",
+      "Reset preserves recovery controls",
+      "Camera/media/photo/system optional pages load",
+      "No console errors in checked states"
+    ],
+    "parity": "Deterministic output verified against source modules",
+    "publication": "None; no repository or catalog submission"
+  }
+}

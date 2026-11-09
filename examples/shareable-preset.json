@@ -1,0 +1,84 @@
+{
+  "format": "glass-dashboard",
+  "version": 1,
+  "appearance": {
+    "cardOpacity": 0.5,
+    "buttonOpacity": 0.55,
+    "barOpacity": 0.18,
+    "accent": "#c99769",
+    "font": "system"
+  },
+  "background": {
+    "preset": "solid"
+  },
+  "navigation": [
+    {
+      "id": "home",
+      "label": "Home",
+      "path": "/glass-dashboard/overview",
+      "enabled": true
+    },
+    {
+      "id": "cameras",
+      "label": "Cameras",
+      "path": "/glass-dashboard/cameras-media",
+      "enabled": true
+    },
+    {
+      "id": "photos",
+      "label": "Photos",
+      "path": "/glass-dashboard/photos",
+      "enabled": true
+    },
+    {
+      "id": "system",
+      "label": "System",
+      "path": "/glass-dashboard/system",
+      "enabled": true
+    },
+    {
+      "id": "settings",
+      "label": "Settings",
+      "path": "/glass-dashboard/settings",
+      "enabled": true
+    }
+  ],
+  "profile": {
+    "configured": true,
+    "enableWeather": true,
+    "enableCameras": true,
+    "enableMedia": true,
+    "enablePhotos": false,
+    "enableServices": false,
+    "enableSystem": true,
+    "keepWeatherExtras": false,
+    "photoMode": "link",
+    "services": []
+  },
+  "slots": [
+    {
+      "key": "weather-0",
+      "target": "weather",
+      "domain": "weather",
+      "label": "Weather"
+    },
+    {
+      "key": "cameras-0",
+      "target": "cameras",
+      "domain": "camera",
+      "label": "Camera"
+    },
+    {
+      "key": "players-0",
+      "target": "players",
+      "domain": "media_player",
+      "label": "Media player"
+    },
+    {
+      "key": "sensors-0",
+      "target": "sensors",
+      "domain": "sensor",
+      "label": "System sensor"
+    }
+  ]
+}

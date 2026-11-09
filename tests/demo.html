@@ -1,0 +1,17 @@
+<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Glass Dashboard — browser fixture</title>
+<style>html,body{margin:0;background:#080e18;color:white;font:16px system-ui}ha-card{display:block;padding:20px}home-assistant,hui-root,hui-section{display:block}</style><home-assistant></home-assistant>
+<script>
+// Browser fixture only: native card factory and HA state are simulated.
+const root=document.querySelector('home-assistant').attachShadow({mode:'open'});root.innerHTML='<ha-sidebar>Native sidebar</ha-sidebar><hui-root></hui-root>';const inner=root.querySelector('hui-root').attachShadow({mode:'open'});inner.innerHTML='<div class="header">Native header</div><hui-view-container id="view"><main style="padding:12px;display:grid;gap:12px"></main></hui-view-container>';
+const states={};if(!new URLSearchParams(location.search).has('empty'))for(const [id,name,state]of [['weather.demo','Demo forecast','sunny'],['camera.front','Front camera','idle'],['media_player.demo','Demo player','idle'],['sensor.cpu','CPU temperature','40']])states[id]={entity_id:id,state,attributes:{friendly_name:name}};
+const hass={states,config:{latitude:0,longitude:0,country:'ZZ',unit_system:{temperature:'°C'}}};let dashboard;
+function make(config){
+ if(config.type.startsWith('custom:')){const card=document.createElement(config.type.slice(7));card.setConfig(config);card.hass=hass;return card;}
+ const host=document.createElement('hui-'+config.type+'-card'),shadow=host.attachShadow({mode:'open'}),card=document.createElement('ha-card');shadow.append(card);card.textContent=config.content||config.name||config.title||config.entity||config.type;
+ if(config.entities)card.textContent+=' '+config.entities.join(', ');
+ for(const child of config.cards||[])card.append(make(child));return host;
+}
+window.loadCardHelpers=async()=>({createCardElement:make});
+function render(){if(!dashboard)return;const main=inner.querySelector('main');main.replaceChildren();if(location.pathname.startsWith('/config/')){const h=document.createElement('h1');h.textContent='Native administration';main.append(h);return;}const path=location.pathname.split('/').pop(),view=dashboard.views.find(v=>v.path===path)||dashboard.views[0];for(const s of view.sections){const section=document.createElement('hui-section');main.append(section);for(const c of s.cards)section.append(make(c));}}
+window.addEventListener('location-changed',render);window.addEventListener('popstate',render);
+</script><script type="module">await import(new URLSearchParams(location.search).has('bundle')?'/hacsfiles/glass-dashboard/glass-dashboard.js':'/local/glass-dashboard/glass-dashboard.js');dashboard=await(await fetch('/dashboard.json')).json();render();</script>

@@ -1,0 +1,11 @@
+# MERGE into an existing lovelace section. Do not replace your existing config.
+lovelace:
+  dashboards:
+    glass-dashboard:
+      mode: yaml
+      title: Glass Dashboard
+      icon: mdi:view-dashboard
+      show_in_sidebar: true
+      filename: glass-dashboard/dashboard.yaml
+# Add /local/glass-dashboard/glass-dashboard.js?v=0.1.5 as a JavaScript module
+# using Settings > Dashboards > Resources. See README for YAML resource mode.

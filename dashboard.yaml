@@ -1,0 +1,515 @@
+{
+  "title": "Glass Dashboard",
+  "views": [
+    {
+      "title": "Home",
+      "path": "overview",
+      "type": "sections",
+      "max_columns": 2,
+      "sections": [
+        {
+          "type": "grid",
+          "column_span": 2,
+          "cards": [
+            {
+              "type": "markdown",
+              "content": "# Welcome to Glass Dashboard\nA clean starting point. Choose your optional modules in **Settings \u2192 Setup**. Backgrounds, fonts, colors and opacity are device-local."
+            }
+          ]
+        },
+        {
+          "type": "grid",
+          "column_span": 2,
+          "cards": [
+            {
+              "type": "custom:glass-configured-section",
+              "mode": "weather",
+              "cards": [
+                {
+                  "type": "markdown",
+                  "content": "### Weather is optional\nOpen **Settings \u2192 Setup** to select your devices. This demo requires no integrations."
+                }
+              ],
+              "grid_options": {
+                "columns": "full"
+              }
+            }
+          ]
+        },
+        {
+          "type": "grid",
+          "column_span": 2,
+          "cards": [
+            {
+              "type": "custom:glass-configured-section",
+              "mode": "services",
+              "cards": [
+                {
+                  "type": "markdown",
+                  "content": "### Services is optional\nOpen **Settings \u2192 Setup** to select your devices. This demo requires no integrations."
+                }
+              ],
+              "grid_options": {
+                "columns": "full"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Cameras & media",
+      "path": "cameras-media",
+      "type": "sections",
+      "max_columns": 2,
+      "sections": [
+        {
+          "type": "grid",
+          "column_span": 2,
+          "cards": [
+            {
+              "type": "custom:glass-configured-section",
+              "mode": "cameras",
+              "cards": [
+                {
+                  "type": "markdown",
+                  "content": "### Cameras is optional\nOpen **Settings \u2192 Setup** to select your devices. This demo requires no integrations."
+                }
+              ],
+              "grid_options": {
+                "columns": "full"
+              }
+            }
+          ]
+        },
+        {
+          "type": "grid",
+          "column_span": 2,
+          "cards": [
+            {
+              "type": "custom:glass-all-cameras-link"
+            }
+          ]
+        },
+        {
+          "type": "grid",
+          "column_span": 2,
+          "cards": [
+            {
+              "type": "custom:glass-configured-section",
+              "mode": "media",
+              "cards": [
+                {
+                  "type": "markdown",
+                  "content": "### Media is optional\nOpen **Settings \u2192 Setup** to select your devices. This demo requires no integrations."
+                }
+              ],
+              "grid_options": {
+                "columns": "full"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Photos",
+      "path": "photos",
+      "type": "sections",
+      "max_columns": 2,
+      "sections": [
+        {
+          "type": "grid",
+          "column_span": 2,
+          "cards": [
+            {
+              "type": "custom:glass-configured-section",
+              "mode": "photos",
+              "cards": [
+                {
+                  "type": "markdown",
+                  "content": "### Photos is optional\nOpen **Settings \u2192 Setup** to select your devices. This demo requires no integrations."
+                }
+              ],
+              "grid_options": {
+                "columns": "full"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "System",
+      "path": "system",
+      "type": "sections",
+      "max_columns": 2,
+      "sections": [
+        {
+          "type": "grid",
+          "column_span": 2,
+          "cards": [
+            {
+              "type": "custom:glass-configured-section",
+              "mode": "system",
+              "cards": [
+                {
+                  "type": "markdown",
+                  "content": "### System is optional\nOpen **Settings \u2192 Setup** to select your devices. This demo requires no integrations."
+                }
+              ],
+              "grid_options": {
+                "columns": "full"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Settings",
+      "path": "settings",
+      "type": "sections",
+      "max_columns": 2,
+      "sections": [
+        {
+          "type": "grid",
+          "column_span": 2,
+          "cards": [
+            {
+              "type": "custom:glass-shortcut",
+              "name": "Appearance",
+              "icon": "mdi:palette",
+              "tap_action": {
+                "action": "navigate",
+                "navigation_path": "/glass-dashboard/advanced-appearance"
+              }
+            }
+          ]
+        },
+        {
+          "type": "grid",
+          "column_span": 2,
+          "cards": [
+            {
+              "type": "custom:glass-shortcut",
+              "name": "Backgrounds",
+              "icon": "mdi:image",
+              "tap_action": {
+                "action": "navigate",
+                "navigation_path": "/glass-dashboard/background-settings"
+              }
+            }
+          ]
+        },
+        {
+          "type": "grid",
+          "column_span": 2,
+          "cards": [
+            {
+              "type": "custom:glass-shortcut",
+              "name": "Navigation",
+              "icon": "mdi:menu",
+              "tap_action": {
+                "action": "navigate",
+                "navigation_path": "/glass-dashboard/navigation-settings"
+              }
+            }
+          ]
+        },
+        {
+          "type": "grid",
+          "column_span": 2,
+          "cards": [
+            {
+              "type": "custom:glass-shortcut",
+              "name": "Setup",
+              "icon": "mdi:clipboard-list",
+              "tap_action": {
+                "action": "navigate",
+                "navigation_path": "/glass-dashboard/dashboard-setup"
+              }
+            }
+          ]
+        },
+        {
+          "type": "grid",
+          "column_span": 2,
+          "cards": [
+            {
+              "type": "custom:glass-shortcut",
+              "name": "Backup & sharing",
+              "icon": "mdi:export-variant",
+              "tap_action": {
+                "action": "navigate",
+                "navigation_path": "/glass-dashboard/backup-sharing"
+              }
+            }
+          ]
+        },
+        {
+          "type": "grid",
+          "column_span": 2,
+          "cards": [
+            {
+              "type": "markdown",
+              "content": "Advanced Home Assistant settings keep the native interface. Use browser Back to return. Recovery: add `?disable_ios_shell` and reload."
+            }
+          ]
+        },
+        {
+          "type": "grid",
+          "column_span": 2,
+          "cards": [
+            {
+              "type": "custom:glass-shortcut",
+              "name": "Advanced HA settings",
+              "icon": "mdi:cog",
+              "tap_action": {
+                "action": "navigate",
+                "navigation_path": "/config/dashboard"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Appearance",
+      "path": "advanced-appearance",
+      "type": "sections",
+      "max_columns": 2,
+      "sections": [
+        {
+          "type": "grid",
+          "column_span": 2,
+          "cards": [
+            {
+              "type": "custom:glass-shortcut",
+              "name": "Back to Settings",
+              "icon": "mdi:arrow-right",
+              "tap_action": {
+                "action": "navigate",
+                "navigation_path": "/glass-dashboard/settings"
+              }
+            }
+          ]
+        },
+        {
+          "type": "grid",
+          "column_span": 2,
+          "cards": [
+            {
+              "type": "custom:glass-appearance-settings-v220"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Backgrounds",
+      "path": "background-settings",
+      "type": "sections",
+      "max_columns": 2,
+      "sections": [
+        {
+          "type": "grid",
+          "column_span": 2,
+          "cards": [
+            {
+              "type": "custom:glass-shortcut",
+              "name": "Back to Settings",
+              "icon": "mdi:arrow-right",
+              "tap_action": {
+                "action": "navigate",
+                "navigation_path": "/glass-dashboard/settings"
+              }
+            }
+          ]
+        },
+        {
+          "type": "grid",
+          "column_span": 2,
+          "cards": [
+            {
+              "type": "custom:glass-background-settings-v103"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Navigation",
+      "path": "navigation-settings",
+      "type": "sections",
+      "max_columns": 2,
+      "sections": [
+        {
+          "type": "grid",
+          "column_span": 2,
+          "cards": [
+            {
+              "type": "custom:glass-shortcut",
+              "name": "Back to Settings",
+              "icon": "mdi:arrow-right",
+              "tap_action": {
+                "action": "navigate",
+                "navigation_path": "/glass-dashboard/settings"
+              }
+            }
+          ]
+        },
+        {
+          "type": "grid",
+          "column_span": 2,
+          "cards": [
+            {
+              "type": "custom:glass-navigation-editor"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Setup",
+      "path": "dashboard-setup",
+      "type": "sections",
+      "max_columns": 2,
+      "sections": [
+        {
+          "type": "grid",
+          "column_span": 2,
+          "cards": [
+            {
+              "type": "custom:glass-shortcut",
+              "name": "Back to Settings",
+              "icon": "mdi:arrow-right",
+              "tap_action": {
+                "action": "navigate",
+                "navigation_path": "/glass-dashboard/settings"
+              }
+            }
+          ]
+        },
+        {
+          "type": "grid",
+          "column_span": 2,
+          "cards": [
+            {
+              "type": "custom:glass-weather-stations"
+            }
+          ]
+        },
+        {
+          "type": "grid",
+          "column_span": 2,
+          "cards": [
+            {
+              "type": "custom:glass-setup-wizard",
+              "defaults": {
+                "services": []
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Backup & sharing",
+      "path": "backup-sharing",
+      "type": "sections",
+      "max_columns": 2,
+      "sections": [
+        {
+          "type": "grid",
+          "column_span": 2,
+          "cards": [
+            {
+              "type": "custom:glass-shortcut",
+              "name": "Back to Settings",
+              "icon": "mdi:arrow-right",
+              "tap_action": {
+                "action": "navigate",
+                "navigation_path": "/glass-dashboard/settings"
+              }
+            }
+          ]
+        },
+        {
+          "type": "grid",
+          "column_span": 2,
+          "cards": [
+            {
+              "type": "custom:glass-portable-settings"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "All cameras",
+      "path": "all-cameras",
+      "type": "sections",
+      "max_columns": 2,
+      "sections": [
+        {
+          "type": "grid",
+          "column_span": 2,
+          "cards": [
+            {
+              "type": "custom:glass-shortcut",
+              "name": "Back to Cameras",
+              "icon": "mdi:arrow-right",
+              "tap_action": {
+                "action": "navigate",
+                "navigation_path": "/glass-dashboard/cameras-media"
+              }
+            }
+          ]
+        },
+        {
+          "type": "grid",
+          "column_span": 2,
+          "cards": [
+            {
+              "type": "custom:glass-all-cameras"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Local weather",
+      "path": "local-weather",
+      "type": "sections",
+      "max_columns": 2,
+      "sections": [
+        {
+          "type": "grid",
+          "column_span": 2,
+          "cards": [
+            {
+              "type": "custom:glass-shortcut",
+              "name": "Back to Home",
+              "icon": "mdi:arrow-right",
+              "tap_action": {
+                "action": "navigate",
+                "navigation_path": "/glass-dashboard/overview"
+              }
+            }
+          ]
+        },
+        {
+          "type": "grid",
+          "column_span": 2,
+          "cards": [
+            {
+              "type": "custom:glass-weather-stations",
+              "mode": "observations"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
