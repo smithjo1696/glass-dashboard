@@ -1,6 +1,6 @@
 // Device-local presentation preferences. No account credentials or entity data are stored.
 (() => {
-  const VERSION = '0.1.5';
+  const VERSION = '0.1.6';
   if (window.__glassAppearanceV2?.version === VERSION || new URLSearchParams(location.search).has('disable_ios_shell')) return;
   const previous = window.__glassAppearanceV2;
   if (previous?.dispose) previous.dispose();
@@ -80,7 +80,7 @@
     ha-sidebar,ha-menu-button,.sidebar-shell{display:none!important}
     :host(home-assistant-main),:host(ha-main),ha-drawer,:host(ha-drawer){--ha-sidebar-width:0px!important;--mdc-drawer-width:0px!important;--kiosk-sidebar-width:0px!important;padding-top:0!important}
     :host(ha-drawer) wa-drawer,:host(ha-drawer) .mdc-drawer,:host(ha-drawer) .mdc-drawer-scrim{display:none!important}.mdc-drawer-app-content{margin-left:0!important}
-    :host(ha-panel-lovelace){padding-top:0!important;background:transparent!important}hui-view-background{background:transparent!important;background-image:none!important}
+    :host(ha-panel-lovelace){padding-top:0!important;background:transparent!important}hui-view-background{background:var(--glass-native-background)!important}
     :host(hui-root) .header{display:none!important}
     :host(hui-root) #view{position:fixed!important;top:var(--glass-content-top,64px)!important;left:0!important;right:0!important;bottom:auto!important;min-height:0!important;max-height:none!important;overflow-x:hidden!important;overflow-y:auto!important;box-sizing:border-box!important;padding-top:0!important;padding-bottom:calc(24px + env(safe-area-inset-bottom,0px))!important;scroll-padding-bottom:32px;-webkit-overflow-scrolling:touch;overscroll-behavior-y:contain}
     :host(ha-panel-config){padding-top:var(--glass-content-top,72px)!important;box-sizing:border-box!important}
@@ -121,7 +121,7 @@
     // Retire styles from the older startup module, which may load from a cached URL.
     // Styles owned by other themes are left intact.
     for (const el of root.querySelectorAll('*')) {
-      if(el.localName==='hui-view-background'){set(el,'background','transparent');set(el,'background-image','none');}
+      if(el.localName==='hui-view-background'){set(el,'background','var(--glass-native-background)');}
       if (el.localName === 'ha-card') { cards.add(el); applyCard(el); }
       if (el.localName === 'hui-view-container' && el.id === 'view') {
         views.add(el);
@@ -129,8 +129,42 @@
       if (el.shadowRoot && el !== host) scan(el.shadowRoot);
     }
   }
+  let adminReturnEnabled = false;
+  const replacedMenus = new Map();
+  function updateAdminReturn() {
+    if(active()) { adminReturnEnabled=true; try { sessionStorage.setItem('glass-settings-return','1'); } catch {} }
+    if(!adminReturnEnabled) { try { adminReturnEnabled=sessionStorage.getItem('glass-settings-return')==='1'; } catch {} }
+    if(!/^\/config(?:\/dashboard)?\/?$/.test(location.pathname)) { restoreMenus(); return; }
+    const walk=root=>{for(const el of root.querySelectorAll('*')){if(el.localName==='ha-menu-button')settingsBack(el);if(el.shadowRoot)walk(el.shadowRoot);}};
+    const ha=document.querySelector('home-assistant'); if(ha?.shadowRoot)walk(ha.shadowRoot);
+  }
+  function settingsBack(menu) {
+    if (!adminReturnEnabled || !/^\/config(?:\/dashboard)?\/?$/.test(location.pathname)) return;
+    if (replacedMenus.has(menu)) return;
+    const back = document.createElement('button');
+    back.type = 'button'; back.textContent = '←';
+    back.setAttribute('aria-label', 'Back to main settings'); back.title = 'Back to main settings';
+    if (menu.hasAttribute('slot')) back.setAttribute('slot', menu.getAttribute('slot'));
+    back.style.cssText = 'display:inline-flex;align-items:center;justify-content:center;width:48px;height:48px;min-width:48px;padding:0;border:0;background:transparent;color:inherit;font-size:28px;cursor:pointer;vertical-align:middle;box-sizing:border-box';
+    back.onclick = event => { event.preventDefault(); event.stopPropagation(); history.pushState(null, '', '/glass-dashboard/settings'); window.dispatchEvent(new CustomEvent('location-changed')); schedule(); };
+    replacedMenus.set(menu, {back, display:menu.style.getPropertyValue('display'), priority:menu.style.getPropertyPriority('display')});
+    menu.style.setProperty('display', 'none', 'important'); menu.parentNode.insertBefore(back, menu);
+  }
+  function restoreMenus() {
+    for (const [menu, old] of replacedMenus) { old.back.remove(); if (old.display) menu.style.setProperty('display',old.display,old.priority); else menu.style.removeProperty('display'); }
+    replacedMenus.clear();
+  }
+
+  function nativeBackground(settings, portrait) {
+    const file = portrait ? settings.portrait || settings.landscape : settings.landscape || settings.portrait;
+    if (!file) return settings.backgroundColor;
+    const position = `${settings[portrait?'portraitX':'landscapeX']}% ${settings[portrait?'portraitY':'landscapeY']}%`;
+    const layout = `${position} / ${settings.fit} no-repeat fixed`;
+    return `linear-gradient(rgba(0,0,0,${settings.backgroundDim}),rgba(0,0,0,${settings.backgroundDim})) ${layout}, url(${JSON.stringify(new URL(file, location.origin).href)}) ${layout}`;
+  }
   function apply() {
     if (!alive) return;
+    updateAdminReturn();
     if(!active()){restoreShell();dirty=true;return;}for(const style of injectedStyles)style.media='';
     const ha = document.querySelector('home-assistant'); if (!ha) return;
     if (!host.isConnected) document.body.appendChild(host);
@@ -145,6 +179,7 @@
     set(document.documentElement, '--glass-content-top', top + 'px'); set(ha, '--glass-content-top', top + 'px');
     set(document.body, 'isolation', 'isolate');
     const portrait = (window.visualViewport?.width || innerWidth) < (window.visualViewport?.height || innerHeight);
+    set(ha, '--glass-native-background', nativeBackground(settings, portrait));
     const file = portrait ? settings.portrait || settings.landscape : settings.landscape || settings.portrait;
     const image = file ? `linear-gradient(rgba(0,0,0,${settings.backgroundDim}),rgba(0,0,0,${settings.backgroundDim})),url(` + JSON.stringify(new URL(file, location.origin).href) + ')' : 'none';
     set(scene, 'background-image', image); set(scene, 'background-size', settings.fit);
@@ -162,7 +197,7 @@
   }
   function schedule() { if (!alive || pending) return; pending = setTimeout(() => { pending = 0; apply(); }, 100); }
   function save(value) { const valid = normalize({...settings,...value}); localStorage.setItem(KEY, JSON.stringify(valid)); settings = valid; for (const card of cards) { if (card.isConnected) applyCard(card); else cards.delete(card); } apply(); window.dispatchEvent(new CustomEvent('glass-appearance-changed')); }
-  function dispose() { alive = false; clearTimeout(pending); clearInterval(fallback); for (const o of observers) o.disconnect(); resizeObserver?.disconnect(); restoreShell(); }
+  function dispose() { restoreMenus(); alive = false; clearTimeout(pending); clearInterval(fallback); for (const o of observers) o.disconnect(); resizeObserver?.disconnect(); restoreShell(); }
   const api = window.__glassAppearanceV2 = { version: VERSION, apply, save, normalize, dispose, setNavigation, defaults: DEFAULTS, get settings() { return { ...settings }; } };
   // Prevent a cached v1 startup import from constructing a second navigation bar.
   window.__glassShellV1 = { apply };
@@ -202,5 +237,6 @@
   let resizeObserver;
   try { resizeObserver = new ResizeObserver(schedule); resizeObserver.observe(host); } catch { /* resize events */ }
   schedule();
+  if(!fallback) fallback=setInterval(schedule,1500);
   window.dispatchEvent(new CustomEvent('glass-theme-ready'));
 })();

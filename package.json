@@ -1,12 +1,12 @@
 {
   "name": "glass-dashboard",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "private": true,
   "license": "MIT",
   "description": "Device-local Home Assistant dashboard preferences and optional modules",
   "scripts": {
     "build": "python tests/build_bundle.py",
-    "test": "python tests/validate.py && node tests/portable.cjs && node tests/native-contract.cjs && node tests/lazy-card.cjs && python tests/build_bundle.py --check"
+    "test": "python tests/validate.py && node tests/portable.cjs && node tests/native-contract.cjs && node tests/background-navigation.cjs && node tests/lazy-card.cjs && python tests/build_bundle.py --check"
   },
   "type": "module"
 }

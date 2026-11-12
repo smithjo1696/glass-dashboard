@@ -19,6 +19,6 @@ def package(version):
     print(archive.name,hashlib.sha256(archive.read_bytes()).hexdigest(),archive.stat().st_size,'bytes')
 if __name__=='__main__':
     import argparse
-    parser=argparse.ArgumentParser();parser.add_argument('--version',default='0.1.5');args=parser.parse_args()
+    parser=argparse.ArgumentParser();parser.add_argument('--version',default='0.1.6');args=parser.parse_args()
     if not __import__('re').fullmatch(r'\d+\.\d+\.\d+',args.version):parser.error('Use a numeric semantic version')
     package(args.version)

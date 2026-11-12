@@ -54,9 +54,9 @@
     "Actual HACS install, catalog review and update migrations remain untested",
     "Confirm draft MIT copyright notice before publishing"
   ],
-  "publication": "No GitHub repository or public release created.",
+  "publication": "Public repository https://github.com/smithjo1696/glass-dashboard; 0.1.6 source update.",
   "repository": {
-    "localGit": "main initialized, no remote, no commits yet",
+    "localGit": "Published main checkout; 0.1.6 source update.",
     "license": "MIT included in local draft for review",
     "workflow": "Pinned official actions with contents:read; equivalent validation commands passed locally; GitHub execution pending"
   },
@@ -72,5 +72,17 @@
     ],
     "parity": "Deterministic output verified against source modules",
     "publication": "None; no repository or catalog submission"
+  },
+  "update016": {
+    "productionConfirmation": "Owner confirmed the corresponding home deployment background restoration on Core 2026.11.1; not a fresh validation of this generic release.",
+    "packageChecks": "Passed module syntax/privacy/default configuration checks, portable settings, native preview contract, background/navigation regressions, lazy-card tests and deterministic bundle parity.",
+    "limitations": [
+      "Fresh authenticated HA 2026.11.1 test of generic bundle pending",
+      "Physical-device check of generic package pending"
+    ],
+    "changes": [
+      "Native background rendering",
+      "Scoped root Settings back arrow"
+    ]
   }
 }

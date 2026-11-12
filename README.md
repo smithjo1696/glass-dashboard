@@ -1,10 +1,10 @@
 # Glass Dashboard
 
-A customizable Home Assistant dashboard with compact navigation, translucent cards, local appearance controls and a guided setup. Preview release **0.1.5**. No third-party cards, HACS, kiosk-mode plugin or card-mod are required.
+A customizable Home Assistant dashboard with compact navigation, translucent cards, local appearance controls and a guided setup. Preview release **0.1.6**. No third-party cards, HACS, kiosk-mode plugin or card-mod are required.
 
 ## Single-file installation
 
-`dist/glass-dashboard.js` contains the complete frontend, including its MIT notice. Copy that one file to `/config/www/glass-dashboard.js`, then add `/local/glass-dashboard.js?v=0.1.5` as a JavaScript module resource. Follow dashboard configuration steps 4–6 below. The multi-file method below is also supported; choose one loader, not both.
+`dist/glass-dashboard.js` contains the complete frontend, including its MIT notice. Copy that one file to `/config/www/glass-dashboard.js`, then add `/local/glass-dashboard.js?v=0.1.6` as a JavaScript module resource. Follow dashboard configuration steps 4–6 below. The multi-file method below is also supported; choose one loader, not both.
 
 ### HACS compatibility preview
 
@@ -18,7 +18,7 @@ Use the manual installation below for the verified setup path.
 
 1. Back up your current dashboard and configuration. Keep your existing default dashboard during testing.
 2. Copy the complete `www/glass-dashboard` directory into `/config/www/glass-dashboard`. Every JavaScript file in that directory is required.
-3. In **Settings → Dashboards → Resources**, add `/local/glass-dashboard/glass-dashboard.js?v=0.1.5` as a **JavaScript module**. Enable Advanced mode in your HA profile if Resources is hidden. HA safe mode does not load custom resources.
+3. In **Settings → Dashboards → Resources**, add `/local/glass-dashboard/glass-dashboard.js?v=0.1.6` as a **JavaScript module**. Enable Advanced mode in your HA profile if Resources is hidden. HA safe mode does not load custom resources.
 4. Create a new dashboard titled **Glass Dashboard**, with URL **glass-dashboard**. Choose an empty dashboard, open its raw configuration editor, and replace its content with `dashboard.yaml`. The file is JSON, which is also valid YAML. Save, then reload the browser.
 5. Open `/glass-dashboard/overview`. The initial demonstration needs no weather, camera, photo, media or server integrations.
 6. Open **Settings → Setup**. Enable the modules you want and choose your own entities. Then save. Settings remains reachable even when every optional module is disabled.
@@ -33,7 +33,7 @@ Merge the `lovelace.dashboards` entry from `configuration.example.yaml` into you
 lovelace:
   resource_mode: yaml
   resources:
-    - url: /local/glass-dashboard/glass-dashboard.js?v=0.1.5
+    - url: /local/glass-dashboard/glass-dashboard.js?v=0.1.6
       type: module
 ```
 
@@ -57,7 +57,9 @@ Photos in this release are a service shortcut, not an embedded Immich carousel o
 
 Settings provides colors, opacity, fonts, crop/focal position, solid backgrounds and separate portrait/landscape uploads. Files upload to HA's native image library only when **Apply** is pressed. No artwork, quotations or fonts are downloaded by default. Use images you have permission to share.
 
-The shell hides the native header/sidebar only within `/glass-dashboard`. Other dashboards and native administration pages keep their normal layout. Compact buttons and card spacing remain responsive; content scrolls below the fixed navigation. Native administration uses browser Back to return to this dashboard.
+The native dashboard background layer displays the selected image and crop on HA 2026.11 as well as older supported versions. The corresponding home deployment was owner-confirmed; generic-package native/physical-device revalidation remains pending.
+
+The shell hides the native header/sidebar only within `/glass-dashboard`. Other dashboards and native administration pages keep their normal layout. Compact buttons and card spacing remain responsive; content scrolls below the fixed navigation. When opened from Glass Dashboard, the main native Settings page provides a back arrow to dashboard Settings. Native submenus retain their own back/search controls; the custom navigation is not overlaid there.
 
 ## Backup and sharing
 

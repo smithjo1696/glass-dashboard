@@ -19,5 +19,6 @@ jobs:
       - run: python tests/validate.py
       - run: node tests/portable.cjs
       - run: node tests/native-contract.cjs
+      - run: node tests/background-navigation.cjs
       - run: node tests/lazy-card.cjs
       - run: python tests/build_bundle.py --check

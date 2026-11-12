@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.6 - preview
+
+- Render selected images on Home Assistant's native view background layer, so an opaque native background cannot hide them after frontend updates.
+- Add a main native Settings back arrow after entering from Glass Dashboard; retain unobstructed native submenu controls.
+- Preserve portrait/landscape selection, focal position, fit, dimming and solid-color preferences.
+- Keep background changes scoped to this dashboard and restore the native styles when leaving it.
+- The corresponding production fix was owner-confirmed on HA Core 2026.11.1; this generic package has automated regression coverage, not a fresh physical-device validation.
+
 ## 0.1.5 - preview
 
 - Wait for native lazy card registration and configuration before assigning Home Assistant data or attaching the card.
